@@ -9,3 +9,5 @@ echo "usted tiene acceso vip"
 else 
 echo "usted es menor de edad larguese"
 fi
+
+# Crear una variable para almacenar la edad
