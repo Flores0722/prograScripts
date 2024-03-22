@@ -8,19 +8,18 @@ while true; do
             "Longitud")
                 echo "Ha seleccionado Longitud"
                 ./longitud.sh
-                read -n 1
                 ;;
             "Masa")
                 echo "Ha seleccionado Masa"
-                read -n 1
+                ./masa.sh
                 ;;
             "Tiempo")
                 echo "Ha seleccionado Tiempo"
-                read -n 1
+                ./tiempo.sh
                 ;;
             "Almacenamiento")
                 echo "Ha seleccionado Almacenamiento"
-                read -n 1
+                ./almacenamiento.sh
                 ;;
             "Salir")
                 echo "Muchas gracias..."

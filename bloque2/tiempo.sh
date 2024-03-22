@@ -5,14 +5,13 @@
 reintentos=0
 
 # tabla de variables con equivalencias, tomando como base el metro
-milimetros=1000
-centimetros=100
-metros=1
-kilometros=0.001
-millas=0.000621371
-yardas=1.09361
-pies=3.28084
-pulgadas=39.3701
+dias=1
+horas=24
+minutos=1440
+segundos=86400
+semanas=0.142857
+meses=0.0328767
+anios=0.00273973
 
 # variables que recibiran la equivalencia para utilizarla en la formula
 medidaorigen=0
@@ -26,60 +25,54 @@ medidadestinosel=""
 cantidad=0
 
 # arreglo de las diferentes medidas de longitud utilizadas
-longitudes=(milimetros centimetros metros kilometros millas yardas pies pulgadas)
+tiempos=(dias horas minutos segundos semanas meses anios)
 
 convertir(){
     case $medidaorigen in
         1)
-            medidaorigen=$milimetros
+            medidaorigen=$dias
             ;;
         2)
-            medidaorigen=$centimetros
+            medidaorigen=$horas
             ;;
         3)
-            medidaorigen=$metros
+            medidaorigen=$minutos
             ;;
         4)
-            medidaorigen=$kilometros
+            medidaorigen=$segundos
             ;;
         5)
-            medidaorigen=$millas
+            medidaorigen=$semanas
             ;;
         6)
-            medidaorigen=$yardas
+            medidaorigen=$meses
             ;;
         7)
-            medidaorigen=$pies
-            ;;
-        8)
-            medidaorigen=$pulgadas
+            medidaorigen=$anios
             ;;
     esac
 
     case $medidadestino in
         1)
-            medidadestino=$milimetros
+            medidadestino=$dias
             ;;
         2)
-            medidadestino=$centimetros
+            medidadestino=$horas
             ;;
         3)
-            medidadestino=$metros
+            medidadestino=$minutos
             ;;
         4)
-            medidadestino=$kilometros
+            medidadestino=$segundos
             ;;
         5)
-            medidadestino=$millas
+            medidadestino=$semanas
             ;;
         6)
-            medidadestino=$yardas
+            medidadestino=$meses
             ;;
         7)
-            medidadestino=$pies
-            ;;
-        8)
-            medidadestino=$pulgadas
+            medidadestino=$anios
             ;;
     esac
 
@@ -119,9 +112,9 @@ ingresar_cantidad(){
 
 seleccionar_destino(){
     echo -e "\nSeleccione la unidad a la cual desea convertir: "
-    select medidadestinosel in ${longitudes[@]}; do
+    select medidadestinosel in ${tiempos[@]}; do
         case $medidadestinosel in
-            "milimetros"|"centimetros"|"metros"|"kilometros"|"millas"|"yardas"|"pies"|"pulgadas")
+            "dias"|"horas"|"minutos"|"segundos"|"semanas"|"meses"|"anios")
                 medidadestino=$REPLY
                 ingresar_cantidad 
                 ;;
@@ -134,9 +127,9 @@ seleccionar_destino(){
 
 seleccionar_origen(){
     echo -e "\nSeleccione la unidad de origen: "
-    select medidaorigensel in ${longitudes[@]}; do
+    select medidaorigensel in ${tiempos[@]}; do
         case $medidaorigensel in
-           "milimetros"|"centimetros"|"metros"|"kilometros"|"millas"|"yardas"|"pies"|"pulgadas")
+           "dias"|"horas"|"minutos"|"segundos"|"semanas"|"meses"|"anios")
                 # $REPLY es una variable especial que guarda el valor ingresado por el usuario
                 medidaorigen=$REPLY
                 seleccionar_destino 

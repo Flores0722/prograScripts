@@ -5,14 +5,11 @@
 reintentos=0
 
 # tabla de variables con equivalencias, tomando como base el metro
-milimetros=1000
-centimetros=100
-metros=1
-kilometros=0.001
-millas=0.000621371
-yardas=1.09361
-pies=3.28084
-pulgadas=39.3701
+bytes=1048576
+kilobytes=1024
+megabytes=1
+gigabytes=0.0009765625
+terabytes=0.00000095367431640625
 
 # variables que recibiran la equivalencia para utilizarla en la formula
 medidaorigen=0
@@ -26,60 +23,42 @@ medidadestinosel=""
 cantidad=0
 
 # arreglo de las diferentes medidas de longitud utilizadas
-longitudes=(milimetros centimetros metros kilometros millas yardas pies pulgadas)
+almacenamientos=(bytes kilobytes megabytes gigabytes terabytes)
 
 convertir(){
     case $medidaorigen in
         1)
-            medidaorigen=$milimetros
+            medidaorigen=$bytes
             ;;
         2)
-            medidaorigen=$centimetros
+            medidaorigen=$kilobytes
             ;;
         3)
-            medidaorigen=$metros
+            medidaorigen=$megabytes
             ;;
         4)
-            medidaorigen=$kilometros
+            medidaorigen=$gigabytes
             ;;
         5)
-            medidaorigen=$millas
-            ;;
-        6)
-            medidaorigen=$yardas
-            ;;
-        7)
-            medidaorigen=$pies
-            ;;
-        8)
-            medidaorigen=$pulgadas
+            medidaorigen=$terabytes
             ;;
     esac
 
     case $medidadestino in
         1)
-            medidadestino=$milimetros
+            medidadestino=$bytes
             ;;
         2)
-            medidadestino=$centimetros
+            medidadestino=$kilobytes
             ;;
         3)
-            medidadestino=$metros
+            medidadestino=$megabytes
             ;;
         4)
-            medidadestino=$kilometros
+            medidadestino=$gigabytes
             ;;
         5)
-            medidadestino=$millas
-            ;;
-        6)
-            medidadestino=$yardas
-            ;;
-        7)
-            medidadestino=$pies
-            ;;
-        8)
-            medidadestino=$pulgadas
+            medidadestino=$terabytes
             ;;
     esac
 
@@ -119,9 +98,9 @@ ingresar_cantidad(){
 
 seleccionar_destino(){
     echo -e "\nSeleccione la unidad a la cual desea convertir: "
-    select medidadestinosel in ${longitudes[@]}; do
+    select medidadestinosel in ${almacenamientos[@]}; do
         case $medidadestinosel in
-            "milimetros"|"centimetros"|"metros"|"kilometros"|"millas"|"yardas"|"pies"|"pulgadas")
+            "bytes"|"kilobytes"|"megabytes"|"gigabytes"|"terabytes")
                 medidadestino=$REPLY
                 ingresar_cantidad 
                 ;;
@@ -134,9 +113,9 @@ seleccionar_destino(){
 
 seleccionar_origen(){
     echo -e "\nSeleccione la unidad de origen: "
-    select medidaorigensel in ${longitudes[@]}; do
+    select medidaorigensel in ${almacenamientos[@]}; do
         case $medidaorigensel in
-           "milimetros"|"centimetros"|"metros"|"kilometros"|"millas"|"yardas"|"pies"|"pulgadas")
+           "bytes"|"kilobytes"|"megabytes"|"gigabytes"|"terabytes")
                 # $REPLY es una variable especial que guarda el valor ingresado por el usuario
                 medidaorigen=$REPLY
                 seleccionar_destino 

@@ -5,14 +5,11 @@
 reintentos=0
 
 # tabla de variables con equivalencias, tomando como base el metro
-milimetros=1000
-centimetros=100
-metros=1
-kilometros=0.001
-millas=0.000621371
-yardas=1.09361
-pies=3.28084
-pulgadas=39.3701
+libras=1
+onzas=16
+gramos=453.592
+kilogramos=0.453592
+toneladas=0.000453592
 
 # variables que recibiran la equivalencia para utilizarla en la formula
 medidaorigen=0
@@ -26,61 +23,44 @@ medidadestinosel=""
 cantidad=0
 
 # arreglo de las diferentes medidas de longitud utilizadas
-longitudes=(milimetros centimetros metros kilometros millas yardas pies pulgadas)
+masas=(libras onzas gramos kilogramos toneladas)
 
 convertir(){
     case $medidaorigen in
         1)
-            medidaorigen=$milimetros
+            medidaorigen=$libras
             ;;
         2)
-            medidaorigen=$centimetros
+            medidaorigen=$onzas
             ;;
         3)
-            medidaorigen=$metros
+            medidaorigen=$gramos
             ;;
         4)
-            medidaorigen=$kilometros
+            medidaorigen=$kilogramos
             ;;
         5)
-            medidaorigen=$millas
-            ;;
-        6)
-            medidaorigen=$yardas
-            ;;
-        7)
-            medidaorigen=$pies
-            ;;
-        8)
-            medidaorigen=$pulgadas
+            medidaorigen=$toneladas
             ;;
     esac
 
     case $medidadestino in
         1)
-            medidadestino=$milimetros
+            medidadestino=$libras
             ;;
         2)
-            medidadestino=$centimetros
+            medidadestino=$onzas
             ;;
         3)
-            medidadestino=$metros
+            medidadestino=$gramos
             ;;
         4)
-            medidadestino=$kilometros
+            medidadestino=$kilogramos
             ;;
         5)
-            medidadestino=$millas
+            medidadestino=$toneladas            
             ;;
-        6)
-            medidadestino=$yardas
-            ;;
-        7)
-            medidadestino=$pies
-            ;;
-        8)
-            medidadestino=$pulgadas
-            ;;
+    
     esac
 
     resultado=$(echo "scale=5; (($cantidad * $medidadestino) / $medidaorigen)" | bc)
@@ -119,9 +99,9 @@ ingresar_cantidad(){
 
 seleccionar_destino(){
     echo -e "\nSeleccione la unidad a la cual desea convertir: "
-    select medidadestinosel in ${longitudes[@]}; do
+    select medidadestinosel in ${masas[@]}; do
         case $medidadestinosel in
-            "milimetros"|"centimetros"|"metros"|"kilometros"|"millas"|"yardas"|"pies"|"pulgadas")
+            "libras"|"onzas"|"gramos"|"kilogramos"|"toneladas")
                 medidadestino=$REPLY
                 ingresar_cantidad 
                 ;;
@@ -134,9 +114,9 @@ seleccionar_destino(){
 
 seleccionar_origen(){
     echo -e "\nSeleccione la unidad de origen: "
-    select medidaorigensel in ${longitudes[@]}; do
+    select medidaorigensel in ${masas[@]}; do
         case $medidaorigensel in
-           "milimetros"|"centimetros"|"metros"|"kilometros"|"millas"|"yardas"|"pies"|"pulgadas")
+           "libras"|"onzas"|"gramos"|"kilogramos"|"toneladas")
                 # $REPLY es una variable especial que guarda el valor ingresado por el usuario
                 medidaorigen=$REPLY
                 seleccionar_destino 
